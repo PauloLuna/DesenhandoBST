@@ -40,12 +40,12 @@ public class BSTFrame extends JFrame {
 	public BSTFrame() {
 		setTitle("Desenhando sua BST (by: jpsl2)");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 450);
+		setBounds(100, 100, 594, 450);
 		
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.SOUTH);
 		
-		JLabel lblAdcioneSeusValores = new JLabel("Adicione seus valores:");
+		JLabel lblAdcioneSeusValores = new JLabel("Adicione seus valores (ou remova):");
 		panel.add(lblAdcioneSeusValores);
 		
 		textField = new JTextField();
@@ -55,17 +55,25 @@ public class BSTFrame extends JFrame {
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				btnAction();
+				btnAddAction();
 			}			
 		});
 		panel.add(btnAdd);
+		
+		JButton btnDel = new JButton("Del");
+		btnDel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				btnDelAction();
+			}
+		});
+		panel.add(btnDel);
 		
 		head = new Head();
 		JPanel panel_1 = new PanelBST(head);
 		getContentPane().add(panel_1, BorderLayout.CENTER);
 	}
 
-	private void btnAction() {
+	private void btnAddAction() {
 		// TODO Auto-generated method stub
 		//Checa se a árvore já tem uma raiz se não tiver cria, se tiver insere em uma folha
 		if(head.bst==null){
@@ -73,6 +81,14 @@ public class BSTFrame extends JFrame {
 			
 		} else{
 			head.bst.inserir(Integer.parseInt(textField.getText()));
+		}
+		repaint();
+	}
+	
+	private void btnDelAction() {
+		// TODO Auto-generated method stub
+		if(head.bst!=null){
+			head.bst = head.bst.remover(Integer.parseInt(textField.getText()));
 		}
 		repaint();
 	}

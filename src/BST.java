@@ -32,6 +32,51 @@ public class BST {
 		}
 	}
 	
+	public BST remover(int value){//essa é uma adaptação do alg visto em sala a lógica é a mesma
+		if(this.value>value){
+			if(this.left!=null){
+				this.left = this.left.remover(value);
+			} else {
+				this.left = null;
+			}
+			return this;
+		} else if(this.value<value){
+			if(this.right!=null){
+				this.right = this.right.remover(value);
+			} else {
+				this.right = null;
+			}
+			return this;
+		} else {//this.value == value
+			BST r = null;
+			if(this.left == null){
+				r = this.right;
+			} else if(this.right == null){
+				r = this.left;
+			} else {
+				RetDeleteMin ret = this.right.deleteMin();//Essa classe foi criada no fim desse arquivo
+				this.right = ret.bst;
+				this.value = ret.val;
+				r = this;
+			}
+			return r;
+		}
+	}
+	
+	private RetDeleteMin deleteMin(){//O método que substitui o nó pelo menor da direita
+		RetDeleteMin  r= null;
+		
+		if(this.left == null){
+			r = new RetDeleteMin(this.right, this.value);
+		} else {
+			r = this.left.deleteMin();
+			this.left = r.bst;
+			r.bst = this;
+		}
+		
+		return r;
+	}
+	
 	public void paint(Graphics g, int x, int y){
 		/*
 		 * Esse é o método que desenha tudo,
@@ -60,5 +105,18 @@ public class BST {
 			g.drawLine(x+20, y+20, x+40, y+40);
 			right.paint(g, x+40, y+40);
 		}
+	}
+}
+
+class RetDeleteMin{
+	/*
+	 * Classe criada pra poder retornar os dois valores
+	 * exigidos pelo método deleteMin()
+	 */
+	public BST bst;
+	public int val;
+	public RetDeleteMin(BST bst, int val){
+		this.bst = bst;
+		this.val = val;
 	}
 }
