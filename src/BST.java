@@ -77,7 +77,7 @@ public class BST {
 		return r;
 	}
 	
-	public void paint(Graphics g, int x, int y){
+	public void paint(Graphics g, int x, int y, int lineSize){
 		/*
 		 * Esse é o método que desenha tudo,
 		 * ele é pequeno porque é recursivo,
@@ -95,15 +95,15 @@ public class BST {
 			 * e manda o próximo nó continuar a impressão
 			 * passando as novas coordenadas para ele
 			 */
-			g.drawLine(x, y+20, x-20, y+40);
-			left.paint(g, x-40, y+40);
+			g.drawLine(x, y+20, x-lineSize*20 +20, y+60);
+			left.paint(g, x-lineSize*20, y+60, lineSize/2);
 		}
 		if(this.right != null){
 			/*
 			 * faz o mesmo que o if acima porém com a sub-árvore a direita
 			 */
-			g.drawLine(x+20, y+20, x+40, y+40);
-			right.paint(g, x+40, y+40);
+			g.drawLine(x+20, y+20, x+lineSize*20, y+60);
+			right.paint(g, x+lineSize*20, y+60, lineSize/2);
 		}
 	}
 }

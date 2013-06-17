@@ -24,9 +24,14 @@ public class PanelBST extends JPanel {
 		// TODO Auto-generated method stub
 		//Se a árvore já existir manda ela imprimir suas partes
 		super.paint(g);
-		if(head.bst!=null)
-		head.bst.paint(g, this.getWidth()/2, y);//manda o centro da tela no eixo x e um valor padrão no eixo y
-												//como posição inicial para pintar o root
+		if(head.bst!=null){
+			int i = 1, apoio  = 0;
+			apoio= this.getWidth()/40;
+			while(i*2<apoio)i*=2;
+			head.bst.paint(g, this.getWidth()/2, y, i/2);//manda o centro da tela no eixo x e um valor padrão no eixo y
+																	//como posição inicial para pintar o root
+		}
+												
 		
 	}
 
