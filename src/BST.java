@@ -1,9 +1,10 @@
 import java.awt.Graphics;
 
+
 //Essa é uma BST bem simples só tem o método inserir e um paint 
 //pra desenhar seus nós na mesma forma que estão estruturados
-public class BST {
-
+public class BST implements Imprimivel{
+	
 	public BST left;
 	public BST right;
 	public int value;
@@ -14,7 +15,7 @@ public class BST {
 		this.right = null;
 	}
 
-	public void inserir(int value){
+	public BST inserir(int value){
 		if(value<this.value){
 			if(left == null){
 				BST no = new BST(value);
@@ -30,6 +31,7 @@ public class BST {
 				this.right.inserir(value);
 			}
 		}
+		return this;
 	}
 	
 	public BST remover(int value){//essa é uma adaptação do alg visto em sala a lógica é a mesma
@@ -106,6 +108,7 @@ public class BST {
 			right.paint(g, x+lineSize*20, y+60, lineSize/2);
 		}
 	}
+	
 }
 
 class RetDeleteMin{

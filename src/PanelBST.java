@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
@@ -24,11 +25,17 @@ public class PanelBST extends JPanel {
 		// TODO Auto-generated method stub
 		//Se a árvore já existir manda ela imprimir suas partes
 		super.paint(g);
-		if(head.bst!=null){
+		if(head.arvore!=null){
 			int i = 1, apoio  = 0;
 			apoio= this.getWidth()/40;
+			if(head.arvore instanceof AVL){
+				if(!((AVL)head.arvore).isBalanced()){
+					g.setColor(Color.RED);
+					g.drawString("Xiii! tá tudo bagunçado. Dá uma balanciada nisso!", 20, 20);
+				}
+			}
 			while(i*2<apoio)i*=2;
-			head.bst.paint(g, this.getWidth()/2, y, i/2);//manda o centro da tela no eixo x e um valor padrão no eixo y
+			((Imprimivel) head.arvore).paint(g, this.getWidth()/2, y, i/2);//manda o centro da tela no eixo x e um valor padrão no eixo y
 																	//como posição inicial para pintar o root
 		}
 												
